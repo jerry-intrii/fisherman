@@ -6,6 +6,8 @@
 
 ```
 CLOUDFLARE_TUNNEL_TOKEN=xxxxxxx
+GOOGLE_CLIENT_ID=your-google-client-id
+GOOGLE_CLIENT_SECRET=your-google-client-secret
 ```
 
 在建立 Public Hostname 時，請將 Service 設定為 `http://app:3000`，Cloudflare 會透過 docker 網路解析 `app` 這個服務名稱。
@@ -21,6 +23,7 @@ docker compose up -d
 
 - `app` 服務會使用 `Dockerfile` 進行多階段建置，並將 SQLite 資料放在命名為 `app-data` 的 volume，可持久化在 `/var/lib/docker/volumes/...`。
 - 預設容器內資料庫目錄為 `/data`，如需更改，可在 `docker-compose.yml` 調整 `POKER_DB_DIR` 並對應到新的 volume。
+- `app` 服務會載入根目錄 `.env`，因此 Google OAuth、Server URL 等變數可直接放在同一檔案。
 
 ## 3. Cloudflare Tunnel
 

@@ -6,6 +6,8 @@ services:
       context: .
       target: app
     image: fisherman-app:latest
+    env_file:
+      - .env
     environment:
       NODE_ENV: production
       PORT: 3000
